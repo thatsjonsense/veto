@@ -1,0 +1,34 @@
+<template name="search">
+
+  {{#constant}}
+  <input type="text" class="searchBox input-block-level" placeholder="Type something..." />
+  {{/constant}}
+  {{#if loading_results}}
+    <div class='pull-right label label-warning'>Loading...</div>
+  {{/if}}
+
+  <p class='text-info'>
+    Found {{results.length}} results for <b>{{query}}</b>.
+  </p>
+
+  <div class='results'>
+    <ul class='media-list'>
+    {{#each results}}
+      <li class='media'>
+        <a class='pull-left' href='#'>
+          <img class='media-object' src='{{venue.photos.groups.0.items.0.prefix}}100x100{{venue.photos.groups.0.items.0.suffix}}'>
+        </a>
+        <div class='media-body'>
+          <h4 class='media-heading'>{{venue.name}}</h3>
+          <p>{{venue.location.address}}</p>
+          {{#each snippets.items}}
+          <p>{{detail.object.text}}</p>
+          {{/each}}
+        </div>
+      </li>
+
+    {{/each}}
+    </ul>
+  </div>
+
+</template>
