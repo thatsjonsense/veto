@@ -6,6 +6,8 @@
   {{#if loading_results}}
     <div class='pull-right label label-warning'>Loading...</div>
   {{/if}}
+  
+  
 
   <p class='text-info'>
     Found {{results.length}} results for <b>{{query}}</b>.
@@ -14,17 +16,17 @@
   <div class='results'>
     <ul class='media-list'>
     {{#each results}}
-      <li class='media row-fluid'>
+      <li class='row-fluid'>
         <div class='span3'>
           <img class='img-responsive' src='{{venue.photos.groups.0.items.0.prefix}}250x250{{venue.photos.groups.0.items.0.suffix}}'>
         </div>
-        <div class='span3'>
-          <img src="http://maps.googleapis.com/maps/api/staticmap?markers={{venue.location.lat}},{{venue.location.lng}}&zoom=14&size=250x250&sensor=false">
-        </div>
         <div class='span6'>
-          <h3 class='media-heading'>{{venue.name}}</h3>
+          <h3>{{venue.name}}</h3>
           <p class='text-info'>{{venue.location.address}}</p>
           <p>{{tips.0.text}}</p>
+        </div>
+        <div class='span3'>
+          <img src="http://maps.googleapis.com/maps/api/staticmap?markers={{venue.location.lat}},{{venue.location.lng}}&zoom=14&size=250x250&sensor=false">
         </div>
       </li>
 

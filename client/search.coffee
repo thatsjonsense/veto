@@ -13,6 +13,12 @@ Template.search.loading_results = ->
   Session.get 'loading_results'
 
 
+Template.search.rendered = ->
+  $('li').draggable
+    axis: 'x'
+    revert: true
+
+
 updateResults = (query) ->
   Meteor.call 'get_venues', query, 'Bellevue, WA', (err, result) ->
     Session.set 'results', result
