@@ -14,7 +14,7 @@ Template.search.loading_results = ->
 
 
 updateResults = (query) ->
-  Meteor.call 'get_venues', query, 'Seattle', 'food', (err, result) ->
+  Meteor.call 'get_venues', query, 'Bellevue, WA', (err, result) ->
     Session.set 'results', result
     Session.set 'loading_results', false
 
@@ -29,8 +29,8 @@ Deps.autorun ->
 
 
 Template.search.results = ->
-  Session.get 'results'
-
+ results = Session.get 'results'
+ results?[...3]
 
 Template.search.events =
   'keyup .searchBox': (evt, template) ->

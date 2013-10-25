@@ -27,5 +27,5 @@ Meteor.methods
 
 
 
-Meteor.Router.add '/test/foursquare', ->
-    prettify getVenues('burritos','Seattle')
+Meteor.Router.add '/test/foursquare/:query', (query) ->
+    prettify getFoursquareResponse(query,'Seattle')

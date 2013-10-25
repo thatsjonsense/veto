@@ -14,16 +14,17 @@
   <div class='results'>
     <ul class='media-list'>
     {{#each results}}
-      <li class='media'>
-        <a class='pull-left' href='#'>
-          <img class='media-object' src='{{venue.photos.groups.0.items.0.prefix}}100x100{{venue.photos.groups.0.items.0.suffix}}'>
-        </a>
-        <div class='media-body'>
-          <h4 class='media-heading'>{{venue.name}}</h3>
-          <p>{{venue.location.address}}</p>
-          {{#each snippets.items}}
-          <p>{{detail.object.text}}</p>
-          {{/each}}
+      <li class='media row-fluid'>
+        <div class='span3'>
+          <img class='img-responsive' src='{{venue.photos.groups.0.items.0.prefix}}250x250{{venue.photos.groups.0.items.0.suffix}}'>
+        </div>
+        <div class='span3'>
+          <img src="http://maps.googleapis.com/maps/api/staticmap?markers={{venue.location.lat}},{{venue.location.lng}}&zoom=14&size=250x250&sensor=false">
+        </div>
+        <div class='span6'>
+          <h3 class='media-heading'>{{venue.name}}</h3>
+          <p class='text-info'>{{venue.location.address}}</p>
+          <p>{{tips.0.text}}</p>
         </div>
       </li>
 
