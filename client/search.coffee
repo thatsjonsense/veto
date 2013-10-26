@@ -1,9 +1,8 @@
-
 Template.search.query = ->
   Session.get 'query'
 
-Template.search.loading_results = ->
-  Session.get 'loading_results'
+Template.search.loading = ->
+  Session.get 'loading'
 
 Template.search.rendered = ->
   $('.card').draggable
@@ -13,38 +12,32 @@ Template.search.rendered = ->
     stop: onCardDragStop
 
 Template.search.results = ->
- results = Session.get 'results'
- results?[...3]
-
-Template.search.events =
-  'keyup .searchBox': (evt, template) ->
-    Session.set 'query', $('.searchBox').val()
-
-
-
-
-# Search
-#########
-
-updateResults = (query, votes) ->
-  vetos = _.where votes, {type: 'veto'}
-  vetoed_venues = _.pluck vetos, 'venue'
-
-  Meteor.call 'get_venues', query, 'Seattle', (err, results) ->
-    
-    venues = _.reject results, (result) -> _.contains vetoed_venues, result.venue.id 
-
-    Session.set 'results', venues
-    Session.set 'loading_results', false
-
-updateResultsThrottled = _.debounce(updateResults, 300)
-
-Deps.autorun ->
-  query = Session.get 'query'
+  log 'new results'
+  results = Session.get 'results'
   votes = Votes.find().fetch()
 
-  Session.set 'loading_results', true
-  updateResults query, votes
+  vetos = (vote.venue for vote in votes when vote.type == 'veto')
+
+  results_left = _.reject results, (result) -> _.contains vetos, result.venue.id
+  Session.set 'loading', false
+
+  return results_left?[...5]
+
+
+
+Template.search.events =
+  'click .logout': -> Meteor.logout()
+  'click .login': -> Meteor.loginWithFacebook()
+  'click .searchButton': -> searchVenues()
+  'keyup .searchBox': (event) ->
+    if event.which == 13
+      searchVenues()
+
+searchVenues = ->
+  Session.set 'query', $('.searchBox').val()
+  Session.set 'loading', true
+  Meteor.call 'get_venues', Session.get('query'), 'Seattle, WA', (err, results) ->
+    Session.set 'results', results
 
 
 # Voting

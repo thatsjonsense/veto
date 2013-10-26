@@ -1,36 +1,51 @@
 <template name="search">
 
-  {{#constant}}
-  <input type="text" class="searchBox input-block-level" placeholder="Type something..." />
-  {{/constant}}
-  {{#if loading_results}}
-    <div class='pull-right label label-warning'>Loading...</div>
-  {{/if}}
+  <div class='navbar navbar-static-top'>
+    <div class="navbar-inner">
+      <a class='brand'>Veto</a>
+      
+      <div class='navbar-form pull-left'>
+      <input type="text" class="searchBox span4 input" placeholder="Type something..." value='{{query}}' />
+      <button type="submit" class='searchButton btn btn-primary'>Search {{#if loading}}<i class="spinner fa fa-spinner fa-spin"></i>{{/if}}</button>
 
-  
+      </div>
 
-  <p class='text-info'>
-    Found {{results.length}} results for <b>{{query}}</b>.
-  </p>
+      <div class='navbar-form pull-right'>
+        {{#if currentUser}}
+        <button class='logout btn btn-danger'>{{currentUser.profile.name}} (log out)</button>
+        {{else}}
+        <button class='login btn btn-success'>Guest (log in)</button>
+        {{/if}}
+      </div>
 
-  <div class='results'>
-    {{#each results}}
-      <div class='rail'>
-        <div class='card' data-venue-id='{{venue.id}}'>
-          <div class='photo'>
-            <img src='{{venue.photos.groups.0.items.0.prefix}}200x200{{venue.photos.groups.0.items.0.suffix}}'>
-          </div>
-          <div class='info'>
-            <h3>{{venue.name}}</h3>
-            <p class='text-info'>{{venue.location.address}}</p>
-            <p>{{tips.0.text}}</p>
-          </div>
-          <div class='map'>
-            <img src="http://maps.googleapis.com/maps/api/staticmap?markers={{venue.location.lat}},{{venue.location.lng}}&zoom=14&size=200x200&sensor=false">
+    </div>
+  </div>
+
+  <div class='wrapper'>
+
+    
+
+
+    <div class='results'>
+      {{#each results}}
+        <div class='rail'>
+          <div class='card' data-venue-id='{{venue.id}}'>
+            <div class='photo'>
+              <img src='{{venue.photos.groups.0.items.0.prefix}}200x200{{venue.photos.groups.0.items.0.suffix}}'>
+            </div>
+            <div class='info'>
+              <h3>{{venue.name}}</h3>
+              <p class='text-info'>{{venue.location.address}}</p>
+              <p>{{tips.0.text}}</p>
+            </div>
+            <div class='map'>
+              <img src="http://maps.googleapis.com/maps/api/staticmap?markers={{venue.location.lat}},{{venue.location.lng}}&zoom=14&size=200x200&sensor=false">
+            </div>
           </div>
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    </div>
+
   </div>
 
 </template>

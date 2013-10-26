@@ -3,15 +3,14 @@
   <title>veto</title>
 
   <script src="scripts/jquery.ui.touch-punch.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+
 
 </head>
 
 <body>
 
   <div class='container-fluid'>
-    {{>header}}
-    <div class='wrapper'>
-      {{#isolate}} {{renderPage}} {{/isolate}}
-    </div>
+    {{#isolate}} {{renderPage}} {{/isolate}}
   </div>
 </body>
