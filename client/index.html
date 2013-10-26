@@ -7,7 +7,11 @@
 </head>
 
 <body>
+
   <div class='container-fluid'>
-    {{#isolate}} {{renderPage}} {{/isolate}}
+    {{>header}}
+    <div class='wrapper'>
+      {{#isolate}} {{renderPage}} {{/isolate}}
+    </div>
   </div>
 </body>

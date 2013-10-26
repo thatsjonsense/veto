@@ -1,0 +1,19 @@
+<template name='header'>
+
+  <div class='navbar navbar-static-top'>
+    <div class="navbar-inner">
+      <a class='brand'>Veto</a>
+
+      <div class='navbar-form pull-right'>
+        {{#if currentUser}}
+        <button class='logout btn btn-danger'>{{currentUser.profile.name}} (log out)</button>
+        {{else}}
+        <button class='login btn btn-success'>Log in</button>
+        {{/if}}
+      </div>
+    
+
+
+    </div>
+  </div>
+</template>
