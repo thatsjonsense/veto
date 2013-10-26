@@ -16,7 +16,7 @@
   <div class='results'>
     {{#each results}}
       <div class='rail'>
-        <div class='card'>
+        <div class='card' data-venue-id='{{venue.id}}'>
           <div class='photo'>
             <img src='{{venue.photos.groups.0.items.0.prefix}}200x200{{venue.photos.groups.0.items.0.suffix}}'>
           </div>
