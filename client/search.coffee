@@ -11,17 +11,32 @@ Template.search.rendered = ->
     drag: onCardDrag
     stop: onCardDragStop
 
+
+HIDE_ON_SWIPE = false
+
 Template.search.results = ->
   log 'new results'
   results = Session.get 'results'
   votes = Votes.find().fetch()
 
-  vetos = (vote.venue for vote in votes when vote.type == 'veto')
+  if not results?
+    return
 
-  results_left = _.reject results, (result) -> _.contains vetos, result.venue.id
+
+  if HIDE_ON_SWIPE
+    vetos = (vote.venue for vote in votes when vote.type == 'veto')
+    top_results = _.reject results, (result) -> _.contains vetos, result.venue.id
+  else
+    top_results = for result in results
+      vetos = Votes.find
+        venue: result.venue.id
+        type: 'veto'
+      .fetch()
+      result.vetoers = (Meteor.users.findOne(veto.user) for veto in vetos)
+      result
+
   Session.set 'loading', false
-
-  return results_left?[...5]
+  return top_results?[...5]
 
 
 
