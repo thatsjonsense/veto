@@ -6,7 +6,7 @@
   {{#if loading_results}}
     <div class='pull-right label label-warning'>Loading...</div>
   {{/if}}
-  
+
   
 
   <p class='text-info'>
@@ -14,24 +14,23 @@
   </p>
 
   <div class='results'>
-    <ul class='media-list'>
     {{#each results}}
-      <li class='row-fluid'>
-        <div class='span3'>
-          <img class='img-responsive' src='{{venue.photos.groups.0.items.0.prefix}}250x250{{venue.photos.groups.0.items.0.suffix}}'>
+      <div class='rail'>
+        <div class='card'>
+          <div class='photo'>
+            <img src='{{venue.photos.groups.0.items.0.prefix}}200x200{{venue.photos.groups.0.items.0.suffix}}'>
+          </div>
+          <div class='info'>
+            <h3>{{venue.name}}</h3>
+            <p class='text-info'>{{venue.location.address}}</p>
+            <p>{{tips.0.text}}</p>
+          </div>
+          <div class='map'>
+            <img src="http://maps.googleapis.com/maps/api/staticmap?markers={{venue.location.lat}},{{venue.location.lng}}&zoom=14&size=200x200&sensor=false">
+          </div>
         </div>
-        <div class='span6'>
-          <h3>{{venue.name}}</h3>
-          <p class='text-info'>{{venue.location.address}}</p>
-          <p>{{tips.0.text}}</p>
-        </div>
-        <div class='span3'>
-          <img src="http://maps.googleapis.com/maps/api/staticmap?markers={{venue.location.lat}},{{venue.location.lng}}&zoom=14&size=250x250&sensor=false">
-        </div>
-      </li>
-
+      </div>
     {{/each}}
-    </ul>
   </div>
 
 </template>

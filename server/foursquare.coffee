@@ -14,8 +14,9 @@ getFoursquareResponse = (query, near) ->
     'near': near
     'venuePhotos': 1
 
-  console.log params
+  log 'Calling Foursquare', params
   result = HTTP.get url, {params: params}
+  log 'Got response'
 
   return result.data.response.groups[0].items
 
