@@ -11,10 +11,10 @@
       </div>
 
       <div class='navbar-form pull-right'>
-        {{#if currentUser}}
-        <button class='logout btn btn-danger'>{{currentUser.profile.name}} (log out)</button>
+        {{#if currentUser.profile.anonymous}}
+        <button class='login btn btn-primary'>{{currentUser.profile.name}} Log in with Facebook</button>
         {{else}}
-        <button class='login btn btn-success'>Guest (log in)</button>
+        <button class='logout btn btn-danger'>{{currentUser.profile.name}} (log out)</button>
         {{/if}}
       </div>
 
@@ -37,13 +37,14 @@
               <h3>{{venue.name}}</h3>
               <p class='text-info'>{{venue.location.address}}</p>
               <p>{{tips.0.text}}</p>
-              {{#if vetoers}}
-              <p class='alert alert-error'>Vetoed by {{#each vetoers}}{{profile.name}}{{/each}}</p>
-              {{/if}}
+              {{#if upvoters}}<p class='alert alert-success'>Upvoted by {{commas upvoters}}</p>{{/if}}
+              {{#if vetoers}}<p class='alert alert-error'>Vetoed by {{commas vetoers}}</p>{{/if}}
             </div>
+            <!--
             <div class='map'>
               <img src="http://maps.googleapis.com/maps/api/staticmap?markers={{venue.location.lat}},{{venue.location.lng}}&zoom=14&size=200x200&sensor=false">
             </div>
+          -->
           </div>
         </div>
       {{/each}}

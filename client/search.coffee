@@ -1,3 +1,9 @@
+
+Deps.autorun ->
+  if not Meteor.user()
+    Meteor.loginAnonymously()
+
+
 Template.search.query = ->
   Session.get 'query'
 
@@ -12,8 +18,6 @@ Template.search.rendered = ->
     stop: onCardDragStop
 
 
-HIDE_ON_SWIPE = false
-
 Template.search.results = ->
   log 'new results'
   results = Session.get 'results'
@@ -23,20 +27,28 @@ Template.search.results = ->
     return
 
 
-  if HIDE_ON_SWIPE
-    vetos = (vote.venue for vote in votes when vote.type == 'veto')
-    top_results = _.reject results, (result) -> _.contains vetos, result.venue.id
-  else
-    top_results = for result in results
-      vetos = Votes.find
-        venue: result.venue.id
-        type: 'veto'
-      .fetch()
-      result.vetoers = (Meteor.users.findOne(veto.user) for veto in vetos)
-      result
+  # Hide your own vetoes
+  my_vetos = (vote.venue for vote in votes when vote.type == 'veto' and vote.user == Meteor.userId())
+  results = _.reject results, (result) -> _.contains my_vetos, result.venue.id
+
+  # Annotate
+  results = for result in results
+    vetos = Votes.find
+      venue: result.venue.id
+      type: 'veto'
+    .fetch()
+    result.vetoers = (Meteor.users.findOne(veto.user)?.profile.name for veto in vetos)
+
+    upvotes = Votes.find
+      venue: result.venue.id
+      type: 'upvote'
+    .fetch()
+    result.upvoters = (Meteor.users.findOne(upvote.user)?.profile.name for upvote in upvotes)
+
+    result
 
   Session.set 'loading', false
-  return top_results?[...5]
+  return results?[...5]
 
 
 
