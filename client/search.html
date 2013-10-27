@@ -4,19 +4,19 @@
     <div class="navbar-inner">
       <a class='brand'><i class="fa fa-cutlery"></i> Veto</a>
       
-      <div class='navbar-form pull-left'>
-      <input type="text" class="searchBox span4" placeholder="Type something..." value='{{query}}' />
+      <div class='navbar-form pull-left form-inline '>
+      <input type="text" class="searchBox" placeholder="Type something..." value='{{query}}' />
       <button type="submit" class='searchButton btn btn-primary'>Search {{#if loading}}<i class="spinner fa fa-spinner fa-spin"></i>{{else}}<i class="fa fa-search"></i>{{/if}}</button>
 
       </div>
 
-      <div class='navbar-form pull-right'>
+      <div class='navbar-form pull-right hidden-phone form-inline'>
         {{#if currentUser.services.facebook}}
-        <button class='comfy-right logout btn btn-danger'><i class="fa fa-facebook"></i> Logout</button>
-        <p class='comfy-right navbar-text'>{{currentUser.profile.name}}</p>
+        <button class='logout btn btn-danger comfy-left'><i class="fa fa-facebook"></i> Logout</button>
+        <p class='navbar-text comfy-left'>{{currentUser.profile.name}}</p>
         {{else}}
-        <button class='comfy-right login btn btn-primary'><i class="fa fa-facebook"></i> Login</button>       
-        <input type="text" id='guestName' class='comfy-right' placeholder="{{guestName}}" />
+        <button class='login btn btn-primary'><i class="fa fa-facebook"></i> Login</button>       
+        <input type="text" id='guestName' placeholder="{{guestName}}" />
         {{/if}}
       </div>
 
