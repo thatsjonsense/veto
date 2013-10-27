@@ -4,22 +4,32 @@ body {
   background-image: url('/retina_wood.png');
 }
 
+
 .wrapper {
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
   margin-top: 25px;
 }
 
+@media (max-width: 767px) {
+  .wrapper {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+}
+
 @card-height: 200px;
+@pad: 10px;
 
 .comfy-left {
   float: left;
-  margin-right: 5px;
+  margin-right: @pad;
 }
 
 .comfy-right {
   float: right;
-  margin-left: 5px;
+  margin-left: @pad;
 }
 
 
@@ -27,22 +37,18 @@ body {
 
 
   .photo {
-    position: absolute;
-    left: 0px;
-    width: @card-height;
   }
 
+/*
   .map {
     position: absolute;
     right: 0px;
     width: @card-height;
   }
+*/
 
   .info {
-    position: absolute;
-    left: @card-height;
-    right: 0px;
-    padding: 10px;
+    padding: @pad;
 
     p {
       white-space: nowrap;
@@ -50,28 +56,16 @@ body {
       overflow: hidden;
     }
 
-    height: @card-height;
-  }
-
-  .rail {
-    background-repeat: no-repeat;
+    //height: @card-height;
   }
 
   .card {
     
     background-color: #fff;
     box-shadow: 0px 1px 2px rgba(0,0,0,.2);
-    margin: 5px;
+    margin: @pad;
     margin-bottom: 20px;
-    height: @card-height;
+    //height: @card-height;
 
   }
 }
-
-/*
-.img-responsive {
- display: block;
- height: auto;
- max-width: 100%;
-}
-*/
