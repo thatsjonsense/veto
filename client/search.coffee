@@ -1,8 +1,10 @@
-###
-Deps.autorun ->
-  if not Meteor.user()
-    Meteor.loginAnonymously()
-###
+
+
+Session.setDefault 'guestName', 'Anonymous'
+
+
+Template.search.guestName = ->
+  Session.get 'guestName'
 
 Template.search.query = ->
   Session.get 'query'
@@ -37,13 +39,13 @@ Template.search.results = ->
       venue: result.venue.id
       type: 'veto'
     .fetch()
-    result.vetoers = (Meteor.users.findOne(veto.user)?.profile.name for veto in vetos)
+    result.vetoers = (Meteor.users.findOne(veto.user)?.profile.name ? veto.guest for veto in vetos)
 
     upvotes = Votes.find
       venue: result.venue.id
       type: 'upvote'
     .fetch()
-    result.upvoters = (Meteor.users.findOne(upvote.user)?.profile.name for upvote in upvotes)
+    result.upvoters = (Meteor.users.findOne(upvote.user)?.profile.name ? upvote.guest for upvote in upvotes)
 
     result
 
@@ -59,6 +61,8 @@ Template.search.events =
   'keyup .searchBox': (event) ->
     if event.which == 13
       searchVenues()
+  'keyup #guestName': ->
+    Session.set 'guestName', $('#guestName').val()
 
 searchVenues = ->
   Session.set 'query', $('.searchBox').val()
@@ -72,8 +76,12 @@ searchVenues = ->
 saveVote = (venue, type) ->
   vote = 
     venue: venue
-    user: Meteor.userId()
     type: type
+
+  if Meteor.user()
+    vote.user = Meteor.userId()
+  else
+    vote.guest = Session.get 'guestName'
 
   Votes.insert vote
 

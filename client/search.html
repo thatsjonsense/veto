@@ -5,7 +5,7 @@
       <a class='brand'><i class="fa fa-cutlery"></i> Veto</a>
       
       <div class='navbar-form pull-left'>
-      <input type="text" class="searchBox span4 input" placeholder="Type something..." value='{{query}}' />
+      <input type="text" class="searchBox span4" placeholder="Type something..." value='{{query}}' />
       <button type="submit" class='searchButton btn btn-primary'>Search {{#if loading}}<i class="spinner fa fa-spinner fa-spin"></i>{{else}}<i class="fa fa-search"></i>{{/if}}</button>
 
       </div>
@@ -15,8 +15,8 @@
         <button class='comfy-right logout btn btn-danger'><i class="fa fa-facebook"></i> Logout</button>
         <p class='comfy-right navbar-text'>{{currentUser.profile.name}}</p>
         {{else}}
-        <button class='comfy-right login btn btn-primary'><i class="fa fa-facebook"></i> Login</button>
-        <p class='comfy-right navbar-text'>{{currentUser.profile.name}}</p>
+        <button class='comfy-right login btn btn-primary'><i class="fa fa-facebook"></i> Login</button>       
+        <input type="text" id='guestName' class='comfy-right' placeholder="{{guestName}}" />
         {{/if}}
       </div>
 
