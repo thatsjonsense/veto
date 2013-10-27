@@ -48,7 +48,7 @@ Template.search.results = ->
     result
 
   Session.set 'loading', false
-  return results?[...5]
+  return _.first _.sortBy(results, (r) -> r.vetoers.length - r.upvoters.length), 5
 
 
 
