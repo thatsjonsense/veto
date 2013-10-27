@@ -2,11 +2,11 @@
 
   <div class='navbar navbar-static-top'>
     <div class="navbar-inner">
-      <a class='brand'>Veto</a>
+      <a class='brand'><i class="fa fa-cutlery"></i> Veto</a>
       
       <div class='navbar-form pull-left'>
       <input type="text" class="searchBox span4 input" placeholder="Type something..." value='{{query}}' />
-      <button type="submit" class='searchButton btn btn-primary'>Search {{#if loading}}<i class="spinner fa fa-spinner fa-spin"></i>{{/if}}</button>
+      <button type="submit" class='searchButton btn btn-primary'>Search {{#if loading}}<i class="spinner fa fa-spinner fa-spin"></i>{{else}}<i class="fa fa-search"></i>{{/if}}</button>
 
       </div>
 
@@ -35,10 +35,10 @@
             </div>
             <div class='info'>
               <h3>{{venue.name}}</h3>
-              <p class='text-info'>{{venue.location.address}}</p>
-              <p>{{tips.0.text}}</p>
-              {{#if upvoters}}<p class='alert alert-success'>Upvoted by {{commas upvoters}}</p>{{/if}}
-              {{#if vetoers}}<p class='alert alert-error'>Vetoed by {{commas vetoers}}</p>{{/if}}
+              <p><i class="fa fa-map-marker"></i> {{venue.location.address}}</p>
+              <p><i class="fa fa-foursquare"></i> {{tips.0.text}}</p>
+              {{#if upvoters}}<p class='comfy-left text-success'><i class="fa fa-thumbs-up"></i> {{commas upvoters}}</p>{{/if}}
+              {{#if vetoers}}<p class='comfy-left text-error'><i class="fa fa-thumbs-down"></i> {{commas vetoers}}</p>{{/if}}
             </div>
             <!--
             <div class='map'>

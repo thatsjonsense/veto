@@ -12,6 +12,11 @@ body {
 
 @card-height: 200px;
 
+.comfy-left {
+  float: left;
+  margin-right: 5px;
+}
+
 
 .results {
 
@@ -33,7 +38,13 @@ body {
     left: @card-height;
     right: 0px;
     padding: 10px;
-    overflow: auto;
+
+    p {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
     height: @card-height;
   }
 
@@ -48,7 +59,6 @@ body {
     margin: 5px;
     margin-bottom: 20px;
     height: @card-height;
-    overflow: hidden;
 
   }
 }
