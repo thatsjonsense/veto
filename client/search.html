@@ -32,13 +32,13 @@
       {{#each results}}
         <div class='rail'>
           <div class='card row-fluid' data-venue-id='{{venue.id}}'>
-            <div class='photo span4'>
+            <div class='photo span5'>
               <img src='{{venue.photos.groups.0.items.0.prefix}}750x750{{venue.photos.groups.0.items.0.suffix}}'>
             </div>
-            <div class='info span8'>
+            <div class='info span7'>
               <h3>{{venue.name}}</h3>
               <p><i class="fa fa-map-marker"></i> {{venue.location.address}}</p>
-              <p><i class="fa fa-foursquare"></i> {{tips.0.text}}</p>
+              <p class='lines3'><i class="fa fa-foursquare"></i> {{tips.0.text}}</p>
               {{#if upvoters}}<p class='comfy-left text-success'><i class="fa fa-thumbs-up"></i> {{commas upvoters}}</p>{{/if}}
               {{#if vetoers}}<p class='comfy-left text-error'><i class="fa fa-thumbs-down"></i> {{commas vetoers}}</p>{{/if}}
             </div>
