@@ -1,8 +1,8 @@
-
+###
 Deps.autorun ->
   if not Meteor.user()
     Meteor.loginAnonymously()
-
+###
 
 Template.search.query = ->
   Session.get 'query'

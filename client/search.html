@@ -11,10 +11,12 @@
       </div>
 
       <div class='navbar-form pull-right'>
-        {{#if currentUser.profile.anonymous}}
-        <button class='login btn btn-primary'>{{currentUser.profile.name}} Log in with Facebook</button>
+        {{#if currentUser.services.facebook}}
+        <button class='comfy-right logout btn btn-danger'><i class="fa fa-facebook"></i> Logout</button>
+        <p class='comfy-right navbar-text'>{{currentUser.profile.name}}</p>
         {{else}}
-        <button class='logout btn btn-danger'>{{currentUser.profile.name}} (log out)</button>
+        <button class='comfy-right login btn btn-primary'><i class="fa fa-facebook"></i> Login</button>
+        <p class='comfy-right navbar-text'>{{currentUser.profile.name}}</p>
         {{/if}}
       </div>
 
