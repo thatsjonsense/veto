@@ -1,22 +1,8 @@
-
-# Anonymous users
-#################
-
-Meteor.startup ->
-  Deps.autorun ->
-    if not Meteor.user()
-      $('#signup').modal('show')
-    else
-      $('#signup').modal('hide')
-      $('.modal-backdrop').remove() #buggy bootstrap :(
-
-
-
-
-# Searching
-###########
-
-
+###
+Deps.autorun ->
+  if not Meteor.user()
+    Meteor.loginAnonymously()
+###
 
 Template.search.query = ->
   Session.get 'query'
